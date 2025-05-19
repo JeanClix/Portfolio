@@ -1,0 +1,86 @@
+﻿@model IEnumerable<ProyectoViewModel>
+@{
+}
+<section class="my-3 my-md-5">
+    <h4 class="text-start mb-3 mb-md-4 fw-light"><i class="bi bi-folder2-open me-2 fs-4"></i>Mis Proyectos</h4>
+
+    @if (Model != null && Model.Any())
+    {
+        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-3 g-md-4">
+            @foreach (var project in Model.OrderBy(p => p.Orden))
+            {
+                <div class="col">
+                    <div class="card h-100 shadow-sm shadow-md-lg border-0 rounded-3 rounded-md-4">
+                        <!-- Imagen del proyecto -->
+                        <div class="overflow-hidden rounded-top-3 rounded-top-md-4" style="height: 180px;">
+                            <img src="@project.ImagenURL"
+                                 class="card-img-top h-100 object-fit-cover"
+                                 alt="@project.Nombre"
+                                 style="transition: transform 0.4s ease;"
+                                 onmouseover="this.style.transform='scale(1.05)'"
+                                 onmouseout="this.style.transform='scale(1)'">
+                        </div>
+
+                        <div class="card-body d-flex flex-column p-3 p-md-4">
+                            <h5 class="card-title fw-bold mb-1 mb-md-2 fs-6 fs-md-5">@project.Nombre</h5>
+
+                            <p class="card-text text-muted small mb-2 mb-md-3">@project.Descripcion</p>
+
+                            @if (project.Tecnologias != null && project.Tecnologias.Any())
+                            {
+                                <div class="mb-2 mb-md-3">
+                                    <small class="text-muted fw-semibold">Tecnologías:</small>
+                                    <div class="d-flex flex-wrap gap-1 gap-md-2 mt-1">
+                                        @foreach (var tech in project.Tecnologias)
+                                        {
+                                            <span class="badge bg-secondary-subtle text-dark rounded-pill px-2 px-md-3 py-1 small">
+                                                @tech
+                                            </span>
+                                        }
+                                    </div>
+                                </div>
+                            }
+                        </div>
+
+                        <div class="card-footer bg-transparent border-0 pb-2 pb-md-3 px-3">
+                            <div class="d-flex flex-wrap gap-1 gap-md-2">
+                                @if (!string.IsNullOrEmpty(project.Links.Demo))
+                                {
+                                    <a href="@project.Links.Demo" target="_blank"
+                                       class="btn btn-primary btn-sm rounded-pill px-3">
+                                        <i class="bi bi-eye-fill me-1"></i> Demo
+                                    </a>
+                                }
+
+                                @if (project.Links.Github != null && project.Links.Github.Any())
+                                {
+                                    @foreach (var link in project.Links.Github)
+                                    {
+                                        <a href="@link" target="_blank"
+                                           class="btn btn-outline-dark btn-sm rounded-pill px-3">
+                                            <i class="bi bi-github me-1"></i> Código
+                                        </a>
+                                    }
+                                }
+
+                                @if (!string.IsNullOrEmpty(project.Links.Youtube))
+                                {
+                                    <a href="@project.Links.Youtube" target="_blank"
+                                       class="btn btn-danger btn-sm rounded-pill px-3">
+                                        <i class="bi bi-youtube me-1"></i> YouTube
+                                    </a>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    }
+    else
+    {
+        <div class="alert alert-info text-center py-2 py-md-3">
+            <i class="bi bi-info-circle-fill me-2"></i> No hay proyectos disponibles actualmente.
+        </div>
+    }
+</section>
