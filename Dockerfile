@@ -1,13 +1,12 @@
 # Etapa de build
 FROM mcr.microsoft.com/dotnet/sdk:9.0 AS build
-WORKDIR /src
+WORKDIR /app
 
+# Copia todos los archivos al contenedor
 COPY . .
 
-# Ajusta la ruta al csproj si está en una subcarpeta
-RUN dotnet restore "WebApplication1/WebApplication1.csproj"
-
-WORKDIR /src/WebApplication1
+# Restaura, compila y publica
+RUN dotnet restore
 RUN dotnet publish -c Release -o /app/out
 
 # Etapa de runtime
