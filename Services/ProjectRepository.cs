@@ -32,7 +32,7 @@ namespace WebApplication1.Services
                     {
                         Nombre = "Sistema de reservas de Hotel",
                         Descripcion = "Sistema de reservas con backend desarrollado en Spring y frontend con Angular. Base de datos utilizada: PostgreSQL",
-                        ImagenURL = "https://www.hotelogix.com/images/get-more-done-for-less.png",
+                        ImagenURL = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQAZINSBcK_Y-6DkL9kGdFqH6KWORcuk_Dr4Q&s",
                         Tecnologias = new List<string> { "Angular", "Spring", "TypeScript", "Java", "Angular Material" },
                         Links = new ProyectoLinks
                         {
